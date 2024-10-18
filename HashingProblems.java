@@ -1,5 +1,5 @@
 /*
- * *** YOUR NAME GOES HERE / YOUR SECTION NUMBER ***
+ * *** NATE CALDERON / 001 ***
  *
  * This HashingProblems object contains three methods / problems that you must
  * complete utilize the HashMap object within the Java's Collection Framework Library.
@@ -32,16 +32,22 @@ class HashingProblems {
      */
 
     public double getAverage(HashMap<Integer, Integer> map, int[] array) {
-
-        /*
-         * ADD YOUR CODE HERE - DO NOT FORGET TO ADD YOU NAME AT TOP OF FILE
-         *
-         * Note: if NO values found in common between the HashMap and supplied array,
-         * returning 0.0 is NOT correct, as that is not the average value. Whereas
-         * returning 0.0/0.0 IS correct (which would return a non-number).
-         */
-
-         return 0.0 / 0.0;
+        // Initialize variables
+        int sum = 0;
+        int count = 0;
+        // Searching for key
+        for (int key : array) {
+            if (map.containsKey(key)) {
+                // Add key value to sum
+                sum += map.get(key);
+                // Add 1 to the count
+                count++;
+            }
+        } 
+        if (count != 0) {
+            return (double) sum / count; // Calc Average 
+        }
+        return 0.0 / 0.0; // When count is 0 i.e no values to calc
   }
 
 
@@ -53,17 +59,16 @@ class HashingProblems {
      */
 
   public ArrayList<String> odd(HashMap<Integer, String> map) {
-    
-      ArrayList<String> result = new ArrayList<>();
-
-      /*
-       * ADD YOUR CODE HERE
-       *
-       * Hint: Consider iterating over the HashMap using the keySet method.
-       */
-
-
-      return result;
+        ArrayList<String> result = new ArrayList<>();
+        // Iterating over key set
+        for (Integer key : map.keySet()) {
+            // Check if key is odd
+            if (key % 2 != 0) {
+                // Add value to result
+                result.add(map.get(key));
+            }
+        }
+        return result;
   }
 
 
@@ -105,12 +110,28 @@ class HashingProblems {
    */
 
   public int twoSums(int[] numbers, int k) {
-
-      /*
-       * ADD YOUR CODE HERE
-       */
-
-      return -1;
+    // Create a HashSet
+    HashSet<Integer> set = new HashSet<>();
+    int count = 0; // Counter for k appearances
+    // Populate HashSet
+    for (int number : numbers) {
+        set.add(number);
+    }
+    // Check for pairs with specified difference K
+    for (int number : numbers) {
+        // number + k
+        if (set.contains(number + k)) {
+            count++; // Add 1 to count
+        }
+        // number - k
+        if (set.contains(number - k)) {
+            count++; // Add 1 to count
+        }
+        // Remove current number from set to avoid double counting
+        set.remove(number); 
+    }
+    // Return count if count > 0, if count is 0, return -1
+    return count > 0 ? count : -1;
   }
 
 } /* end class HashingProblems */
