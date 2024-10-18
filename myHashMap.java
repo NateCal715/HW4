@@ -409,15 +409,21 @@ class myHashMap<K,V> {
      */
 
     public V replace(K key, V val) {
+        // Alias key to index
         int index = getBucketIndex(key);
+        // Utilize get method to obtain key
         HashNode<K, V> head = bucket.get(index);
+        // Search for key matching specified value
         while (head != null) {
             if (head.key.equals(key)) {
+                // Initialize oldVal to be value in node
                 V oldValue = head.value;
+                // Replace value in node with specified value
                 head.value = val;
+                // return oldValue
                 return oldValue;
             }
-            head = head.next;
+            head = head.next; // Move on to next node recursively
         }
         return val;
     }
@@ -439,18 +445,23 @@ class myHashMap<K,V> {
      */
 
     public boolean replace(K key, V oldVal, V newVal) {
+        // Alias key with index
         int index = getBucketIndex(key);
+        // Use get method to obtain key
         HashNode<K, V> head = bucket.get(index);
+        // Search for key matching specified value
         while (head != null) {
             if (head.key.equals(key)) {
+                // Check oldVal
                 if (head.value.equals(oldVal)) {
+                    // Utilize replace method
                     replace(key, newVal);
                     return true;
                 } else {
                     return false;
                 }
             }
-            head = head.next;
+            head = head.next; // Move on to next node recursively
         }
         return false;
     }
